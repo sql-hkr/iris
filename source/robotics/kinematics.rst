@@ -80,7 +80,7 @@
 
 .. math::
 
-   |\tilde{q}| = \sqrt{\tilde{q}_0\tilde{q}^*} = \sqrt{q_0^2 + q_1^2 + q_2^2 + q_3^2} .
+   |\tilde{q}| = \sqrt{\tilde{q}\tilde{q}^*} = \sqrt{q_0^2 + q_1^2 + q_2^2 + q_3^2} .
 
 逆数は，
 
@@ -88,3 +88,45 @@
 
    \tilde{q}^{-1} = \frac{\tilde{q}^*}{|\tilde{q}|^2} .
 
+四元数を用いた回転は，原点を通る単位ベクトル :math:`\mathbf{n}` を軸とし，角度 :math:`\theta` だけ回転する場合，
+
+.. math::
+
+   \tilde{q} = \cos\frac{\theta}{2} + \mathbf{n}\sin\frac{\theta}{2}
+
+となり，ある座標系の位置ベクトル :math:`\mathbf{r}` を回転させた位置ベクトル :math:`\mathbf{r}'` に対応する四元数 :math:`\tilde{r}'` は，
+
+.. math::
+
+   \tilde{r}' = \tilde{q}\tilde{r}\tilde{q}^{-1} .
+
+なお， :math:`\tilde{r} = r_x i + r_y j + r_z k` である．
+
+四元数の時間微分は，
+
+.. math::
+
+   \frac{d\tilde{q}}{dt}
+   = \lim_{\Delta t \to 0} \frac{\tilde{q}(t + \Delta t) - \tilde{q}(t)}{\Delta t}
+   = \lim_{\Delta t \to 0} \frac{\tilde{q}(t)\tilde{q}(\Delta t) - \tilde{q}(t)}{\Delta t}
+   = \lim_{\Delta t \to 0} \frac{\Delta \theta}{2\Delta t}\mathbf{n}\tilde{q}
+   = \frac{1}{2}\mathbf{\omega}\tilde{q} .
+
+これを行列で表すと，
+
+.. math::
+
+   \frac{d}{dt}
+   \begin{bmatrix}
+   q_0 \\ q_1 \\ q_2 \\ q_3
+   \end{bmatrix}
+   = \frac{1}{2}
+   \begin{bmatrix}
+   0 & -\omega_1 & -\omega_2 & -\omega_3 \\
+   \omega_1 & 0 & -\omega_3 & \omega_2 \\
+   \omega_2 & \omega_3 & 0 & -\omega_1 \\
+   \omega_3 & -\omega_2 & \omega_1 & 0
+   \end{bmatrix}
+   \begin{bmatrix}
+   q_0 \\ q_1 \\ q_2 \\ q_3
+   \end{bmatrix} .
