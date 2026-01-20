@@ -1,10 +1,8 @@
-Iris
+電気・電子回路
 ==================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   :numbered:
-
-   robotics/main
-   ckt/main
+   
+   dpc
