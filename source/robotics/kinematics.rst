@@ -23,31 +23,29 @@
 
 .. math::
 
-    \begin{aligned}
-    {}^AR_B
-    = \text{Rot}(\mathbf{z}_A,\phi)\text{Rot}(\mathbf{y}_{A'},\theta)\text{Rot}(\mathbf{z}_{A''},\psi)=&\\
-    = \begin{bmatrix}
-    C_\phi C_\theta C_\psi - S_\phi S_\psi & -C_\phi C_\theta S_\psi - S_\phi C_\psi & C_\phi S_\theta \\
-    S_\phi C_\theta C_\psi + C_\phi S_\psi & -S_\phi C_\theta S_\psi + C_\phi C_\psi & S_\phi S_\theta \\
-    -S_\theta C_\psi & S_\theta S_\psi & C_\theta
-    \end{bmatrix} &
-    \end{aligned}
+   {}^AR_B
+   = \text{Rot}(\mathbf{z}_A,\phi)\text{Rot}(\mathbf{y}_{A'},\theta)\text{Rot}(\mathbf{z}_{A''},\psi) =
 
-と表現する．ここで， :math:`C_\alpha = \cos\alpha` ， :math:`S_\alpha = \sin\alpha` である．
+   = \begin{bmatrix}
+   \cos\phi \cos\theta \cos\psi - \sin\phi \sin\psi & -\cos\phi \cos\theta \sin\psi - \sin\phi \cos\psi & \cos\phi \sin\theta \\
+   \sin\phi \cos\theta \cos\psi + \cos\phi \sin\psi & -\sin\phi \cos\theta \sin\psi + \cos\phi \cos\psi & \sin\phi \sin\theta \\
+   -\sin\theta \cos\psi & \sin\theta \sin\psi & \cos\theta
+   \end{bmatrix}
+
+と表現する．
 
 また，ロール・ピッチ・ヨー角(ZYXオイラー角)は，座標系 :math:`\Sigma_A` から座標系 :math:`\Sigma_B` への回転を，
 
 .. math::
 
-    \begin{aligned}
-    {}^AR_B
-    = \text{Rot}(\mathbf{z}_A,\phi)\text{Rot}(\mathbf{y}_{A'},\theta)\text{Rot}(\mathbf{x}_{A''},\psi)=&\\
-    = \begin{bmatrix}
-    C_\phi C_\theta & C_\phi S_\theta S_\psi - S_\phi C_\psi & C_\phi S_\theta C_\psi + S_\phi S_\psi \\
-    S_\phi C_\theta & S_\phi S_\theta S_\psi + C_\phi C_\psi & S_\phi S_\theta C_\psi - C_\phi S_\psi \\
-    -S_\theta & C_\theta S_\psi & C_\theta C_\psi
-    \end{bmatrix} &
-    \end{aligned}
+   {}^AR_B
+   = \text{Rot}(\mathbf{z}_A,\phi)\text{Rot}(\mathbf{y}_{A'},\theta)\text{Rot}(\mathbf{x}_{A''},\psi) =
+
+   = \begin{bmatrix}
+   \cos\phi \cos\theta & \cos\phi \sin\theta \sin\psi - \sin\phi \cos\psi & \cos\phi \sin\theta \cos\psi + \sin\phi \sin\psi \\
+   \sin\phi \cos\theta & \sin\phi \sin\theta \sin\psi + \cos\phi \cos\psi & \sin\phi \sin\theta \cos\psi - \cos\phi \sin\psi \\
+   -\sin\theta & \cos\theta \sin\psi & \cos\theta \cos\psi
+   \end{bmatrix} &
 
 と表現する．
 
@@ -184,9 +182,9 @@
 .. math::
 
    {}^A\mathbf{\omega}_B = \begin{bmatrix}
-   0 & -S_{\phi} & -C_{\phi}S_{\theta} \\
-   0 & C_{\phi} & S_{\phi}S_{\theta} \\
-   1 & 0 & C_{\theta}
+   0 & -\sin\phi & -\cos\phi\sin\theta \\
+   0 & \cos\phi & \sin\phi\sin\theta \\
+   1 & 0 & \cos\theta
    \end{bmatrix}
    {}^A\dot{\mathbf{\phi}}_B
 
@@ -224,3 +222,37 @@
 .. math::
 
    {}^A\dot{\mathbf{\omega}} = {}^A\dot{\omega}_B + {}^AR_B {}^B\dot{\mathbf{\omega}} + {}^A\omega_B \times ({}^AR_B {}^B\mathbf{\omega}) .
+
+
+修正DH法
+-----------------
+
+リンク座標系 :math:`i-1` から見たリンク座標系 :math:`i` への同次変換行列は，
+
+.. math::
+   
+   {}^{i-1}T_i =
+   \text{Trans}(\mathbf{x}_{i-1},a_{i-1})\text{Rot}(\mathbf{x}_{i-1},\alpha_{i-1})\text{Trans}(\mathbf{z}_i,d_i)\text{Rot}(\mathbf{z}_i,\theta_i) =
+
+   = \begin{bmatrix}
+   1 & 0 & 0 & a_{i-1} \\
+   0 & \cos\alpha_{i-1} & -\sin\alpha_{i-1} & 0 \\
+   0 & \sin\alpha_{i-1} & \cos\alpha_{i-1} & 0 \\
+   0 & 0 & 0 & 1
+   \end{bmatrix}
+   \begin{bmatrix}
+   \cos\theta_i & -\sin\theta_i & 0 & 0 \\
+   \sin\theta_i & \cos\theta_i & 0 & 0 \\
+   0 & 0 & 1 & d_i \\
+   0 & 0 & 0 & 1
+   \end{bmatrix}
+
+   = \begin{bmatrix}
+   \cos\theta_i & -\sin\theta_i & 0 & a_{i-1} \\
+   \sin\theta_i \cos\alpha_{i-1} & \cos\theta_i \cos\alpha_{i-1} & -\sin\alpha_{i-1} & -d_i \sin\alpha_{i-1} \\
+   \sin\theta_i \sin\alpha_{i-1} & \cos\theta_i \sin\alpha_{i-1} & \cos\alpha_{i-1} & d_i \cos\alpha_{i-1} \\
+   0 & 0 & 0 & 1
+   \end{bmatrix}
+
+で表される．ここで， :math:`a_{i-1}` はリンク長， :math:`\alpha_{i-1}` はリンクねじれ角， :math:`d_i` はリンクオフセット， :math:`\theta_i` は関節角である．
+
