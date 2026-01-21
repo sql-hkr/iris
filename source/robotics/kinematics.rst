@@ -130,3 +130,97 @@
    \begin{bmatrix}
    q_0 \\ q_1 \\ q_2 \\ q_3
    \end{bmatrix} .
+
+同次変換
+-----------------
+
+:math:`\Sigma_A` から :math:`\Sigma_B` への同次変換行列 :math:`{}^AT_B` は，
+
+.. math::
+
+   {}^AT_B \equiv
+   \begin{bmatrix}
+   {}^AR_B & {}^A\mathbf{p}_B \\
+   \mathbf{0}^T & 1
+   \end{bmatrix}
+   =
+   \begin{bmatrix}
+   I & {}^A\mathbf{p}_B \\
+   \mathbf{0}^T & 1
+   \end{bmatrix}
+   \begin{bmatrix}
+   {}^AR_B & \mathbf{0} \\
+   \mathbf{0}^T & 1
+   \end{bmatrix}
+
+で表される．ここで， :math:`{}^AR_B` は回転行列， :math:`{}^A\mathbf{p}_B` は位置ベクトルである．
+
+:math:`{}^AT_B` の逆行列は，
+
+.. math::
+
+   {}^AT_B^{-1} = {}^BT_A =
+   \begin{bmatrix}
+   {}^BR_A & {}^B\mathbf{p}_A \\
+   \mathbf{0}^T & 1
+   \end{bmatrix}
+   =
+   \begin{bmatrix}
+   {}^AR_B^T & -{}^AR_B^T {}^A\mathbf{p}_B \\
+   \mathbf{0}^T & 1
+   \end{bmatrix}
+
+座標系の速度，加速度
+-----------------
+
+原点位置の移動速度は，単純に
+
+.. math::
+   
+   {}^A\dot{\mathbf{p}}_B = \frac{d}{dt}{}^A\mathbf{p}_B
+
+と時間微分すればよい．姿勢の変化速度（角速度ベクトル）は， :math:`{}^A\mathbf{\phi}_B` をオイラー角とすると，
+
+.. math::
+
+   {}^A\mathbf{\omega}_B = \begin{bmatrix}
+   0 & -S_{\phi} & -C_{\phi}S_{\theta} \\
+   0 & C_{\phi} & S_{\phi}S_{\theta} \\
+   1 & 0 & C_{\theta}
+   \end{bmatrix}
+   {}^A\dot{\mathbf{\phi}}_B
+
+と表現できる．これは，直交座標系の各軸回りの回転速度の合成となっており，どんな姿勢変化でも表すことができる．しかし，回転軸が変化するとき角速度ベクトルの積分値には意味がない．
+
+次に，移動する座標系上の点について考える．
+
+.. math::
+
+   {}^A\mathrm{r} = {}^A\mathbf{p}_B + {}^AR_B {}^B\mathrm{r}
+
+の時間微分を取ると，
+
+.. math::
+
+   {}^A\dot{\mathrm{r}} = {}^A\dot{\mathbf{p}}_B + \frac{d}{dt}({}^AR_B{}^B\mathrm{r})
+   = {}^A\dot{\mathbf{p}}_B + {}^A\dot{R}_B {}^B\mathrm{r} + {}^AR_B {}^B\dot{\mathrm{r}}=
+
+   = {}^A\dot{\mathbf{p}}_B + {}^A\omega_B \times ({}^AR_B {}^B\mathrm{r}) + {}^AR_B {}^B\dot{\mathrm{r}}.
+
+さらに時間微分を取ると，
+
+.. math::
+
+   {}^A\ddot{\mathrm{r}} = {}^A\ddot{\mathbf{p}}_B + {}^A\dot{\omega}_B \times ({}^AR_B {}^B\mathrm{r}) + {}^A\omega_B \times [{}^A\omega_B \times ({}^AR_B {}^B\mathrm{r})] + 2{}^A\omega_B \times ({}^AR_B {}^B\dot{\mathrm{r}}) + {}^AR_B {}^B\ddot{\mathrm{r}}.
+
+角速度は，
+
+.. math::
+
+   {}^A\mathbf{\omega} = {}^AR_B {}^B\mathbf{\omega} + {}^A\omega_B .
+
+さらに時間微分を取ると，
+
+.. math::
+
+   {}^A\dot{\mathbf{\omega}} = {}^A\dot{\omega}_B + {}^AR_B {}^B\dot{\mathbf{\omega}} + {}^A\omega_B \times ({}^AR_B {}^B\mathbf{\omega}) .
