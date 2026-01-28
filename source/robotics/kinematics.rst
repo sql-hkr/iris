@@ -256,3 +256,59 @@
 
 で表される．ここで， :math:`a_{i-1}` はリンク長， :math:`\alpha_{i-1}` はリンクねじれ角， :math:`d_i` はリンクオフセット， :math:`\theta_i` は関節角である．
 
+
+順運動学
+-----------------
+
+関節変位 :math:`\mathbf{q} = [q_1,q_2,\ldots,q_n]^T` と手先位置姿勢 :math:`\mathbf{r} = [r_1, r_2, \ldots, r_m]^T` の関係は，ロボットアーム機構に依存し，
+
+.. math::
+
+   \mathbf{r} = \mathbf{f}(\mathbf{q})
+
+で表され，一般に非線形である．各関節の座標系を同次変換行列で表すと，シリアルリンクからなる :math:`n` 自由度多関節ロボットアームの手先の同次変換行列は，
+
+.. math::
+
+   {}^0T_n = {}^0T_1 {}^1T_2 \cdots {}^{n-1}T_n .
+
+なお，回転行列だけでも成立する．
+
+.. math::
+
+   {}^0R_n = {}^0R_1 {}^1R_2 \cdots {}^{n-1}R_n  .
+
+回転関節のリンク座標系間の速度と角速度は，
+
+.. math::
+
+   {}^0\mathbf{\omega}_i = {}^0\mathbf{\omega}_{i-1} + {}^0\mathbf{z}_i\dot{q}_i
+
+   {}^0\dot{\mathbf{p}}_i = {}^0\dot{\mathbf{p}}_{i-1} + {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i)
+
+となり，さらに時間微分を取ると，回転関節の加速度および角加速度
+
+.. math::
+
+   {}^0\dot{\mathbf{\omega}}_i = {}^0\dot{\mathbf{\omega}}_{i-1} + {}^0\mathbf{z}_i \ddot{q}_i + {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i)
+
+   {}^0\ddot{\mathbf{p}}_i = {}^0\ddot{\mathbf{p}}_{i-1} + {}^0\dot{\mathbf{\omega}}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) + {}^0\mathbf{\omega}_{i-1} \times [ {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) ]
+
+を得る．一方，直動関節の場合は，
+
+.. math::
+
+   {}^0\mathbf{\omega}_i = {}^0\mathbf{\omega}_{i-1}
+
+   {}^0\dot{\mathbf{p}}_i = {}^0\dot{\mathbf{p}}_{i-1} + {}^0\mathbf{z}_i \dot{q}_i + {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i)
+
+となり，加速度および角加速度は，
+
+.. math::
+
+   {}^0\dot{\mathbf{\omega}}_i = {}^0\dot{\mathbf{\omega}}_{i-1}
+
+   {}^0\ddot{\mathbf{p}}_i = {}^0\ddot{\mathbf{p}}_{i-1} + {}^0\mathbf{z}_i \ddot{q}_i + 2{}^0\mathbf{\omega}_{i-1} \times ({}^0\mathbf{z}_i \dot{q}_i)
+   
+   + {}^0\dot{\mathbf{\omega}}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) + {}^0\mathbf{\omega}_{i-1} \times [ {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) ] .
+
