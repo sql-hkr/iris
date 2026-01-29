@@ -139,16 +139,16 @@
    {}^AT_B \equiv
    \begin{bmatrix}
    {}^AR_B & {}^A\mathbf{p}_B \\
-   \mathbf{0}^T & 1
+   \mathbf{0}^\top & 1
    \end{bmatrix}
    =
    \begin{bmatrix}
    I & {}^A\mathbf{p}_B \\
-   \mathbf{0}^T & 1
+   \mathbf{0}^\top & 1
    \end{bmatrix}
    \begin{bmatrix}
    {}^AR_B & \mathbf{0} \\
-   \mathbf{0}^T & 1
+   \mathbf{0}^\top & 1
    \end{bmatrix}
 
 で表される．ここで， :math:`{}^AR_B` は回転行列， :math:`{}^A\mathbf{p}_B` は位置ベクトルである．
@@ -160,12 +160,12 @@
    {}^AT_B^{-1} = {}^BT_A =
    \begin{bmatrix}
    {}^BR_A & {}^B\mathbf{p}_A \\
-   \mathbf{0}^T & 1
+   \mathbf{0}^\top & 1
    \end{bmatrix}
    =
    \begin{bmatrix}
-   {}^AR_B^T & -{}^AR_B^T {}^A\mathbf{p}_B \\
-   \mathbf{0}^T & 1
+   {}^AR_B^\top & -{}^AR_B^\top {}^A\mathbf{p}_B \\
+   \mathbf{0}^\top & 1
    \end{bmatrix}
 
 座標系の速度，加速度
@@ -260,11 +260,11 @@
 順運動学
 -----------------
 
-関節変位 :math:`\mathbf{q} = [q_1,q_2,\ldots,q_n]^T` と手先位置姿勢 :math:`\mathbf{r} = [r_1, r_2, \ldots, r_m]^T` の関係は，ロボットアーム機構に依存し，
+関節変位 :math:`\mathbf{q} = [q_1,q_2,\ldots,q_n]^\top` と手先位置姿勢 :math:`\mathbf{r} = [r_1, r_2, \ldots, r_m]^\top` の関係は，ロボットアーム機構に依存し，
 
 .. math::
 
-   \mathbf{r} = \mathbf{f}(\mathbf{q})
+   \mathbf{r} = f(\mathbf{q})
 
 で表され，一般に非線形である．各関節の座標系を同次変換行列で表すと，シリアルリンクからなる :math:`n` 自由度多関節ロボットアームの手先の同次変換行列は，
 
@@ -311,4 +311,97 @@
    {}^0\ddot{\mathbf{p}}_i = {}^0\ddot{\mathbf{p}}_{i-1} + {}^0\mathbf{z}_i \ddot{q}_i + 2{}^0\mathbf{\omega}_{i-1} \times ({}^0\mathbf{z}_i \dot{q}_i)
    
    + {}^0\dot{\mathbf{\omega}}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) + {}^0\mathbf{\omega}_{i-1} \times [ {}^0\mathbf{\omega}_{i-1} \times ({}^0R_{i-1} {}^{i-1}\mathbf{p}_i) ] .
+
+
+逆運動学
+-----------------
+
+逆運動学とは，手先位置姿勢 :math:`\mathbf{r}` から関節変位 :math:`\mathbf{q}` を求めることであり，
+
+.. math::
+
+   \mathbf{q} = f^{-1}(\mathbf{r})
+
+で表される．アームの機構によっては代数的に解ける場合もあるが，ここでは，繰り返し収束計算による数値解法を示す．
+
+:math:`\mathbf{r} = f(\mathbf{q})` を時間微分すると，
+
+.. math::
+
+   \dot{\mathbf{r}} = J(\mathbf{q}) \dot{\mathbf{q}}
+
+となる．ここで，
+
+.. math::
+
+   J(\mathbf{q}) \equiv \frac{\partial f(\mathbf{q})}{\partial \mathbf{q}^\top} = \begin{bmatrix}
+   \frac{\partial r_1}{\partial q_1} & \frac{\partial r_1}{\partial q_2} & \cdots & \frac{\partial r_1}{\partial q_n} \\
+   \frac{\partial r_2}{\partial q_1} & \frac{\partial r_2}{\partial q_2} & \cdots & \frac{\partial r_2}{\partial q_n} \\
+   \vdots & \vdots & \ddots & \vdots \\
+   \frac{\partial r_m}{\partial q_1} & \frac{\partial r_m}{\partial q_2} & \cdots & \frac{\partial r_m}{\partial q_n}
+   \end{bmatrix}
+
+はJacobian行列である．なお，
+
+.. math::
+
+   \dot{\mathbf{r}} = \begin{bmatrix}
+   \dot{\mathbf{p}} \\ \dot{\mathbf{\eta}}
+   \end{bmatrix}
+
+は擬似ベクトルであり，姿勢の微分の意味がわかりにくい．そこで，手先姿勢の変化を角速度ベクトル :math:`\mathbf{\omega}` を用いて，
+
+.. math::
+
+   \dot{\mathbf{r}}_\omega = \begin{bmatrix}
+   \dot{\mathbf{p}} \\ \mathbf{\omega}
+   \end{bmatrix}
+
+   \dot{\mathbf{r}}_\omega = J_\omega(\mathbf{q}) \dot{\mathbf{q}}
+と表現する場合もなる．ただし，一般には，Jacobian行列が異なり，
+
+.. math::
+
+   J_\omega \equiv \begin{bmatrix}
+   I_3 & 0 \\
+   0 & \Pi
+   \end{bmatrix} J
+
+という変換が必要となる．ここで， :math:`\Pi` は :math:`\mathbf{\eta}=[\phi, \theta, \psi]^\top` をオイラー角とした場合の回転行列であり，
+
+.. math::
+
+   \Pi \equiv \begin{bmatrix}
+   0 & -\sin\phi & \cos\phi\sin\theta \\
+   0 & \cos\phi & \sin\phi\sin\theta \\
+   1 & 0 & \cos\theta
+   \end{bmatrix} .
+
+手先の位置姿勢の加速度は，
+
+.. math::
+
+   \ddot{\mathbf{r}} = J\ddot{\mathbf{q}} + \dot{J}\dot{\mathbf{q}}
+
+となる．同様にして，
+
+.. math::
+
+   \ddot{\mathbf{r}}_\omega = J_\omega \ddot{\mathbf{q}} + \dot{J}_\omega\dot{\mathbf{q}}
+
+を得る． :math:`J` が正則である場合，関節速度および加速度は，
+
+.. math::
+
+   \dot{\mathbf{q}} = J^{-1} \dot{\mathbf{r}}
+
+   \ddot{\mathbf{q}} = J^{-1}(\ddot{\mathbf{r}} - \dot{J}\dot{\mathbf{q}})
+
+で求められる．しかし，アームの関節が冗長で :math:`J\in \mathbb{R}^{m\times n}` が正則でなく， :math:`\text{rank}J = m` のときは，擬似逆行列 :math:`J^+ = J^\top(JJ^\top)^{-1}` を用いて，
+
+.. math::
+
+   \dot{\mathbf{q}} = J^+ \dot{\mathbf{r}} + (I - J^+J)\mathbf{w}
+
+を得る．ここで， :math:`\mathbf{w}` は任意の定数ベクトルであり，解が無数に存在する．
 
