@@ -5,6 +5,7 @@
    :maxdepth: 2
    :caption: Contents:
    
+   quadripole
    harmonics
    dpc
    transient
