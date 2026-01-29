@@ -209,7 +209,9 @@
 
 .. math::
 
-   {}^A\ddot{\mathrm{r}} = {}^A\ddot{\mathbf{p}}_B + {}^A\dot{\omega}_B \times ({}^AR_B {}^B\mathrm{r}) + {}^A\omega_B \times [{}^A\omega_B \times ({}^AR_B {}^B\mathrm{r})] + 2{}^A\omega_B \times ({}^AR_B {}^B\dot{\mathrm{r}}) + {}^AR_B {}^B\ddot{\mathrm{r}}.
+   {}^A\ddot{\mathrm{r}} = {}^A\ddot{\mathbf{p}}_B + {}^A\dot{\omega}_B \times ({}^AR_B {}^B\mathrm{r}) + {}^A\omega_B \times [{}^A\omega_B \times ({}^AR_B {}^B\mathrm{r})]
+   
+   + 2{}^A\omega_B \times ({}^AR_B {}^B\dot{\mathrm{r}}) + {}^AR_B {}^B\ddot{\mathrm{r}}.
 
 角速度は，
 
@@ -245,7 +247,7 @@
    \sin\theta_i & \cos\theta_i & 0 & 0 \\
    0 & 0 & 1 & d_i \\
    0 & 0 & 0 & 1
-   \end{bmatrix}
+   \end{bmatrix} =
 
    = \begin{bmatrix}
    \cos\theta_i & -\sin\theta_i & 0 & a_{i-1} \\
@@ -404,4 +406,53 @@
    \dot{\mathbf{q}} = J^+ \dot{\mathbf{r}} + (I - J^+J)\mathbf{w}
 
 を得る．ここで， :math:`\mathbf{w}` は任意の定数ベクトルであり，解が無数に存在する．
+
+
+可操作性
+-----------------
+
+ロボットの構造の評価指標として，手先をいかに自由に動かせるか，対象にいかに自由に力を加えられるかを示す可操作性がある．関節速度が :math:`\|\dot{\mathbf{q}}\| = 1` であるとき，手先の速度がとりうる範囲は， :math:`m` 次元の楕円体で表される．この楕円体は，可操作性楕円体と呼ばれ，
+
+.. math::
+
+   \|\dot{\mathbf{q}}\| = \dot{\mathbf{r}}^\top (J_\omega J_\omega^\top)^{-1} \dot{\mathbf{r}} = 1
+
+で表される．特異値分解 :math:`J_\omega = U\Sigma V^\top` を用いると，可操作性楕円体の体積は，特異値 :math:`\sigma_1, \sigma_2, \ldots, \sigma_m` を用いて，
+
+.. math::
+
+   V \propto \prod_{i=1}^{m} \sigma_i
+
+となる．これは，手先の操作能力，すなわち可操作性を示す指標となり，可操作度 :math:`w` と呼ばれる．
+
+.. math::
+
+   w \equiv \prod_{i=1}^{m} \sigma_i = \sqrt{\det(J_\omega J_\omega^\top)}
+
+:math:`\sigma_i = 0` のとき， :math:`w = 0` となり，ロボットアームは次に示す特異姿勢となる．
+
+
+特異姿勢
+-----------------
+
+ロボットアームの作業範囲での自由度 :math:`m` の特異姿勢とは，
+
+.. math::
+
+   \text{rank}J_\omega < m
+
+となる :math:`\mathbf{q}` である．よって，特異姿勢である必要十分条件は，
+
+.. math::
+
+   w = \sqrt{\det(J_\omega J_\omega^\top)} = 0
+
+である．特に，冗長でないロボットアームの場合は，
+
+.. math::
+
+   w = |\det J_\omega| = 0
+
+である．特異姿勢，またそれに近い姿勢において，関節速度が求まらなかったり，過大な関節速度が必要となったりする問題が生じる．
+
 
