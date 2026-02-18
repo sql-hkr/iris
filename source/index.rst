@@ -7,4 +7,5 @@ Iris
    :numbered:
 
    robotics/main
+   ros2/main
    ckt/main
