@@ -74,8 +74,3 @@
     \dot{Z}_0 = \sqrt[4]{\frac{R^2 + \omega^2 L^2}{G^2 + \omega^2 C^2}}.
 
     \arg(\dot{Z}_0) = \frac{1}{2} \tan^{-1}\left(\frac{\omega L}{R}\right) - \frac{1}{2} \tan^{-1}\left(\frac{\omega C}{G}\right).
-
-参考文献
-----------
-
-.. [#f1] 小郷 寛，小亀 英己，石亀 篤司，『基礎からの交流理論』，オーム社，2002年．
