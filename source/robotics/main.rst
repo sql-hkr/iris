@@ -6,4 +6,5 @@
    :caption: Contents:
    
    kinematics
+   ee
    nls
