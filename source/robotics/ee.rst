@@ -73,3 +73,73 @@ End effector 制御
     V = \text{face} \{\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_n\}
 
 と書くこともある．
+
+
+接触の静力学モデル
+-------------------
+
+指 :math:`i` が物体と点接触しているとき，垂直抗力は，
+
+.. math::
+
+    \mathbf{f}_i = R_i(-\mathbf{n}_i)
+
+である．ここで， :math:`R_i\geq 0` は垂直抗力の大きさ， :math:`n_i` は法線ベクトルである．摩擦がないと仮定すると，
+
+.. math::
+
+    \begin{bmatrix}
+    \mathbf{f}_i\\
+    (\mathbf{x}_i-\mathbf{x}_0)\times\mathbf{f}_i
+    \end{bmatrix}
+    =-R_i\mathbf{w}_i
+
+を得る．外力と外モーメントをまとめて :math:`\mathbf{p}` とすると，力とモーメントの釣り合いより，
+
+.. math::
+
+    \mathbf{p}:\sum_{i=1}^n(-R_i\mathbf{w}_i)=\mathbf{0}
+
+となる．釣り合いが保たれる外力と外モーメントの集合は，
+
+.. math::
+
+    P=\left\{ \sum_{i=1}^n R_i\mathbf{w}_i\in\mathbb{R}^6 \mid \forall i\in\{1,2,\ldots,n\}, R_i \geq 0 \right\} .
+
+この集合は :math:`P` を許容力集合と呼ぶ．span形式で，
+
+.. math::
+
+    P=\text{span}\{\mathbf{w}_1,\mathbf{w}_2,\cdots,\mathbf{w}_n\}
+
+と書くこともある．摩擦がある場合は，摩擦係数が一定であるとし，合力の集合は摩擦円錐で与えられる．指 :math:`i` に対する摩擦円錐を :math:`m` 個の稜線をもつ凸多面推で近似すると，稜線に沿うベクトル :math:`\mathbf{d}_{i,j}` を用いて，
+
+.. math::
+
+    \mathbf{f}_i = \sum_{j=1}^m R_{i,j}(-\mathbf{d}_{i,j}),\quad R_{i,j}\geq 0
+
+となる．ここで，
+
+.. math::
+
+    \mathbf{w}_{i,j} \equiv
+    \begin{bmatrix}
+    \mathbf{d}_{i,j}\\
+    (\mathbf{x}_i-\mathbf{o})\times \mathbf{d}_{i,j}
+    \end{bmatrix}
+
+とし，許容力集合
+
+.. math::
+
+    P = \text{span} \{ \mathbf{w}_{1,1},\mathbf{w}_{1,2},\cdots,\mathbf{w}_{1,m},
+    
+    \cdots,\mathbf{w}_{n,1},\mathbf{w}_{n,2},\cdots,\mathbf{w}_{n,m} \}
+
+を得る．face形式とspan形式は互い双対であり，凸多面錐 :math:`C` の双対凸多面体錐を :math:`C^*` で表す．摩擦がない場合は特に，
+
+.. math::
+
+    P=V^*, \quad V=P^*
+
+が成り立つ．
