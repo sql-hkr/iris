@@ -98,7 +98,7 @@ End effector 制御
 
 .. math::
 
-    \mathbf{p}:\sum_{i=1}^n(-R_i\mathbf{w}_i)=\mathbf{0}
+    \mathbf{p}+\sum_{i=1}^n(-R_i\mathbf{w}_i)=\mathbf{0}
 
 となる．釣り合いが保たれる外力と外モーメントの集合は，
 
