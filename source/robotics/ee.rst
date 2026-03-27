@@ -4,11 +4,11 @@ End effector 制御
 接触の運動学モデル
 --------------------
 
-物体座標系 :math:`C-\xi\eta\zeta` ，空間座標系 :math:`O-xyz` を設定する．空間座標系で表した点 :math:`C` の位置ベクトルを :math:`\mathbf{x}_0` ，指 :math:`i` と接触点 :math:`P_i` の位置ベクトルを :math:`\mathbf{x}_i` とした場合，
+物体座標系 :math:`C-\xi\eta\zeta` ，空間座標系 :math:`O-xyz` を設定する．空間座標系で表した点 :math:`C` の位置ベクトルを :math:`\mathbf{x}_o` ，指 :math:`i` の接触点 :math:`P_i` の位置ベクトルを :math:`\mathbf{x}_i` とした場合，
 
 .. math::
 
-   \dot{\mathbf{x}_i} = \dot{\mathbf{x}}_0 + \mathbf{\omega}\times(\mathbf{x}_i-\mathbf{x}_0)
+   \dot{\mathbf{x}_i} = \dot{\mathbf{x}}_o + \mathbf{\omega}\times(\mathbf{x}_i-\mathbf{x}_0)
 
 となる，ここで， :math:`\mathbf{\omega}` は物体の角速度ベクトルである．指が物体と干渉しないためには，
 
@@ -20,7 +20,7 @@ End effector 制御
 
 .. math::
 
-    \mathbf{n}_i^\top\cdot\dot{\mathbf{x}}_0 + \mathbf{n}_i^\top\cdot(\mathbf{\omega}\times(\mathbf{x}_i-\mathbf{x}_0)) \leq 0
+    \mathbf{n}_i^\top\cdot\dot{\mathbf{x}}_o + \mathbf{n}_i^\top\cdot(\mathbf{\omega}\times(\mathbf{x}_i-\mathbf{x}_o)) \leq 0
 
 となり，スカラー三重積の公式を用いて，
 
@@ -28,10 +28,10 @@ End effector 制御
 
     \begin{bmatrix}
     \mathbf{n}_i\\
-    (\mathbf{x}_i-\mathbf{x}_0)\times\mathbf{n}_i
+    (\mathbf{x}_i-\mathbf{x}_o)\times\mathbf{n}_i
     \end{bmatrix}^\top
     \begin{bmatrix}
-    \dot{\mathbf{x}}_0 \\
+    \dot{\mathbf{x}}_o \\
     \mathbf{\omega}
     \end{bmatrix} \leq 0
 
@@ -41,11 +41,11 @@ End effector 制御
 
     \mathbf{w}_i \equiv \begin{bmatrix}
     \mathbf{n}_i\\
-    (\mathbf{x}_i-\mathbf{x}_0)\times\mathbf{n}_i
+    (\mathbf{x}_i-\mathbf{x}_o)\times\mathbf{n}_i
     \end{bmatrix}
     ,\quad
     \dot{\mathbf{x}} \equiv \begin{bmatrix}
-    \dot{\mathbf{x}}_0 \\
+    \dot{\mathbf{x}}_o \\
     \mathbf{\omega}
     \end{bmatrix}
 
@@ -90,7 +90,7 @@ End effector 制御
 
     \begin{bmatrix}
     \mathbf{f}_i\\
-    (\mathbf{x}_i-\mathbf{x}_0)\times\mathbf{f}_i
+    (\mathbf{x}_i-\mathbf{x}_o)\times\mathbf{f}_i
     \end{bmatrix}
     =-R_i\mathbf{w}_i
 
