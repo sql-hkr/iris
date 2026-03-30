@@ -7,4 +7,5 @@
    
    kinematics
    ee
+   teaching
    nls
