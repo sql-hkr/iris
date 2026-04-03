@@ -8,4 +8,5 @@
    kinematics
    ee
    teaching
+   mobile
    nls
