@@ -6,8 +6,6 @@ Iris
    :caption: Contents:
    :numbered:
 
-   robotics/main
-   sensor/main
-   ros2/main
    ckt/main
+   robotics/main
    ref

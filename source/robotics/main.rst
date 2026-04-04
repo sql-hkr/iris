@@ -9,4 +9,6 @@
    ee
    teaching
    mobile
+   sensor/main
+   ros2/main
    nls
