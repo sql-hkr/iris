@@ -1,6 +1,7 @@
 参考文献
 =============
 
+#. Cottingham, W. Noel, and Derek A. Greenwood. An introduction to the standard model of particle physics. Cambridge university press, 2007.
 #. Khalil, Hassan K., and Jessy W. Grizzle. Nonlinear systems. Vol. 3. Upper Saddle River, NJ: Prentice hall, 2002.
 #. Siciliano, Bruno, and Oussama Khatib. "Robotics and the handbook." Springer Handbook of Robotics. Cham: Springer International Publishing, 2016.
 #. Murray, Richard M., Zexiang Li, and S. Shankar Sastry. A mathematical introduction to robotic manipulation. CRC press, 2017.
