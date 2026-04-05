@@ -32,7 +32,7 @@ Maxwell方程式
 
 .. math::
 
-    J^\nu = \begin{bmatrix}
+    J^\nu \equiv \begin{bmatrix}
     \rho \\
     \mathbf{J}
     \end{bmatrix}
@@ -49,7 +49,7 @@ Maxwell方程式
 
 .. math::
 
-    A^\mu = \begin{bmatrix}
+    A^\mu \equiv \begin{bmatrix}
     \phi \\
     \mathbf{A}
     \end{bmatrix}
@@ -58,7 +58,7 @@ Maxwell方程式
 
 .. math::
 
-    F^{\mu\nu} = \partial^\mu A^\nu - \partial^\nu A^\mu
+    F^{\mu\nu} \equiv \partial^\mu A^\nu - \partial^\nu A^\mu
     = \begin{bmatrix}
     0 & -E_x & -E_y & -E_z \\
     E_x & 0 & -B_z & B_y \\
