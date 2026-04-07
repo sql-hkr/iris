@@ -215,3 +215,27 @@ Maxwell方程式の解
     \left(\frac{\partial^2}{\partial t^2} - \nabla^2\right) A^\mu = J^\mu
 
 となる．
+
+空間反転
+-----------
+
+空間反転は，座標を :math:`\mathbf{r} \to -\mathbf{r}` と変換する．このとき，電場はベクトルであるため， :math:`\mathbf{E} \to -\mathbf{E}` と変換される．一方，磁場は擬ベクトルであるため， :math:`\mathbf{B} \to \mathbf{B}` と変換される．したがって，Maxwell方程式は空間反転に対して不変である．
+
+荷電共役変換
+-------------------
+
+物質と反物質を入れ替える変換の前後で，Maxwell方程式が同じ形で成立するかという問題は興味深い．この変換に伴い，電荷密度と電流密度はいずれも符号を変える．
+
+.. math::
+
+    \rho(\mathbf{r}) \to \rho^C(\mathbf{r}) = -\rho(\mathbf{r})
+
+    \mathbf{J}(\mathbf{r}) \to \mathbf{J}^C(\mathbf{r}) = -\mathbf{J}(\mathbf{r})
+
+さらに，次のように場の変換を定義する：
+
+.. math::
+
+    \phi^C(\mathbf{r}) = -\phi(\mathbf{r}), \quad \mathbf{A}^C(\mathbf{r}) = -\mathbf{A}(\mathbf{r})
+
+このとき，Maxwell方程式は同じ形を保つ．この操作は電荷共役変換と呼ばれる．Lorentz変換やParity変換と同様に，この電荷共役変換のもとでもLagrangian密度は不変である．
