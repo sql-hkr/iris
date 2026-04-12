@@ -70,6 +70,25 @@
 
     \mathbf{y} \equiv \mathbf{z}^{(L)}
 
-と表記する．重みやバイアスはネットワークのパラメータであり，明示的に :math:`\mathbf{y}(\mathbf{x}; \mathbf{w})` のように書くこともある．
+と表記する．重みやバイアスはネットワークのパラメータであり，明示的に :math:`\mathbf{y}(\mathbf{x}; \mathbf{\theta})` のように書くこともある．このパラメータを学習し，適切な出力を得ることがニューラルネットワークの目的である．教師あり学習では，下記のような入力 :math:`\mathbf{x}` に対する望ましい出力 :math:`\mathbf{d}` のペアが複数与えられる．
 
+.. math::
+
+    \{(\mathbf{x}_n, \mathbf{d}_n)\}_{n=1}^N \equiv \{(\mathbf{x}_1, \mathbf{d}_1), (\mathbf{x}_2, \mathbf{d}_2), \ldots, (\mathbf{x}_N, \mathbf{d}_N)\}
+
+各ペアを訓練サンプル，その集合を訓練データと呼ぶ．次に，具体的な問題の定式化と損失関数について，回帰，2値分類，多クラス分類，マルチラベル分類，順序回帰，信号の陰的表現などを取り上げたい．
+
+回帰とは，2変数の関係をデータから推定することをいい，一般に，二乗誤差
+
+.. math::
+
+    \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{\theta})\|^2
+
+が用いられる．これを訓練データの :math:`N` 個のサンプルについて加算した
+
+.. math::
+
+    \mathcal{L}(\theta) = \sum_{n=1}^N \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{\theta})\|^2
+
+が損失関数となる．なお，目的とする関数の値域により適切な活性化関数を選定する必要がある．例えば，目的とする関数の値域が :math:`[-1,1]` であればtanh関数，任意の実数 :math:`(-\infty, \infty)` であれば恒等関数が適切である．
 
