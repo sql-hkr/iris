@@ -10,4 +10,5 @@ Iris
    ckt/main
    ml/main
    robotics/main
+   os/main
    ref
