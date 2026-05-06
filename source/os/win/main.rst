@@ -6,3 +6,4 @@ Windows
    :caption: Contents:
    
    wsl2
+   bcdedit
