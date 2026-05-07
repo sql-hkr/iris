@@ -8,6 +8,7 @@ Iris
 
    sm/main
    ckt/main
+   toc/main
    ml/main
    robotics/main
    os/main
