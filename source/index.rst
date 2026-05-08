@@ -8,8 +8,9 @@ Iris
 
    sm/main
    ckt/main
-   toc/main
    ml/main
+   algo/main
+   toc/main
    robotics/main
    os/main
    ref
