@@ -60,3 +60,29 @@
     = \sqrt{\frac{1}{2}}\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}}}\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}+\frac{1}{2}\sqrt{\frac{1}{2}}}}\cdots
 
 を得る．なお， :math:`n=4` とした．
+
+:math:`\arctan` 系公式
+----------------------------
+
+マチンの公式は，
+
+.. math::
+
+    \frac{\pi}{4} = 4\arctan\frac{1}{5} - \arctan\frac{1}{239}.
+
+Proof.
+
+.. math::
+
+    4\arctan\frac{1}{5} = 2\left(2\arctan\frac{1}{5}\right)
+    = 2\left(\arctan\frac{5}{12}\right)
+    = \arctan\frac{120}{119}
+
+であるから，
+
+.. math::
+
+    4\arctan\frac{1}{5} - \frac{\pi}{4} = 4\arctan\frac{1}{5} - 4\arctan\frac{1}{1} =
+
+    = \arctan\frac{120}{119} - \arctan\frac{1}{1}
+    = \arctan\frac{1}{239}. \quad \square
