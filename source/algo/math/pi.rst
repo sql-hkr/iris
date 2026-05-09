@@ -123,7 +123,7 @@ Proof.
 
     \frac{\pi}{4} = \arctan\frac{1}{2} + \arctan\frac{1}{3}
 
-    = 2\arctan\frac{1}{3} - \arctan\frac{1}{7}
+    = 2\arctan\frac{1}{2} - \arctan\frac{1}{7}
 
     = 2\arctan\frac{1}{3} + \arctan\frac{1}{7}
 
