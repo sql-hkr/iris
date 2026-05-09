@@ -65,7 +65,7 @@ Proof.
 
 を得る．なお， :math:`n=4` とした．
 
-:math:`\arctan` 系公式
+:math:`\arctan` 系
 ----------------------------
 
 :math:`\arctan x` の値はMaclaurin展開を利用して，
@@ -128,3 +128,64 @@ Proof.
     = 2\arctan\frac{1}{3} + \arctan\frac{1}{7}
 
     = 4\arctan\frac{1}{5} - \arctan\frac{1}{239}.
+
+BBP系
+----------
+
+BBPの公式は，
+
+.. math::
+
+    \pi = \sum_{k=0}^\infty\frac{1}{16^k}\left(\frac{4}{8k+1} - \frac{2}{8k+4} - \frac{1}{8k+5} - \frac{1}{8k+6}\right).
+
+Proof.
+
+.. math::
+
+    S \equiv \sum_{k=0}^\infty\frac{1}{16^k}\left(\frac{4}{8k+1} - \frac{2}{8k+4} - \frac{1}{8k+5} - \frac{1}{8k+6}\right) =
+
+    = 4\sum_{k=0}^\infty\int_0^1\frac{x^{8k}}{16^k}\,dx - 2\sum_{k=0}^\infty\int_0^1\frac{x^{8k+3}}{16^k}\,dx
+    
+    - \sum_{k=0}^\infty\int_0^1\frac{x^{8k+4}}{16^k}\,dx - \sum_{k=0}^\infty\int_0^1\frac{x^{8k+5}}{16^k}\,dx.
+
+:math:`0 \leq x \leq 1` では :math:`\left|x^8/16\right| \leq 1/16 < 1` であるから，幾何級数 :math:`\sum_{k=0}^\infty (x^8/16)^k` は一様収束する．したがって項別積分ができて，
+
+.. math::
+
+    S = \int_0^1\left(4 - 2x^3 - x^4 - x^5\right)\sum_{k=0}^\infty\left(\frac{x^8}{16}\right)^k\,dx =
+
+    = \int_0^1\frac{4 - 2x^3 - x^4 - x^5}{1 - x^8/16}\,dx =
+
+    = \int_0^1\frac{64 - 32x^3 - 16x^4 - 16x^5}{16 - x^8}\,dx.
+
+ここで，
+
+.. math::
+
+    64 - 32x^3 - 16x^4 - 16x^5 = 16(1-x)(x^2+2)(x^2+2x+2),
+
+    16 - x^8 = (2-x^2)(x^2+2)(x^2-2x+2)(x^2+2x+2)
+
+であるから，
+
+.. math::
+
+    S = \int_0^1\frac{16(1-x)}{(2-x^2)(x^2-2x+2)}\,dx.
+
+さらに部分分数分解すると，
+
+.. math::
+
+    \frac{16(1-x)}{(2-x^2)(x^2-2x+2)} = -\frac{4x}{2-x^2} + \frac{8-4x}{x^2-2x+2}
+
+である．よって，
+
+.. math::
+
+    S = \int_0^1-\frac{4x}{2-x^2}\,dx + \int_0^1\frac{8-4x}{x^2-2x+2}\,dx =
+
+    = \left[2\log(2-x^2)\right]_0^1 + \left[-2\log(x^2-2x+2) + 4\arctan(x-1)\right]_0^1 =
+
+    = -2\log 2 + \left(0 - \left(-2\log 2 - \pi\right)\right) =
+
+    = \pi. \quad \square
