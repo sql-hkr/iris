@@ -92,3 +92,23 @@
 
 が損失関数となる．なお，目的とする関数の値域により適切な活性化関数を選定する必要がある．例えば，目的とする関数の値域が :math:`[-1,1]` であればtanh関数，任意の実数 :math:`(-\infty, \infty)` であれば恒等関数が適切である．
 
+2値分類は，入力 :math:`\mathbf{x}` を2つのクラスのいずれかに割り当てる問題である．クラスラベルを :math:`k\in \{0,1\}` とすると，入力 :math:`\mathbf{x}` がクラス :math:`1` に属する事後確率 :math:`p(k=1|\mathbf{x})` をネットワークの出力として表すことができる．
+
+.. math::
+
+    p(k=1|\mathbf{x}) = y(\mathbf{x}; \mathbf{w})
+
+このモデルが訓練データ :math:`\{(\mathbf{x}_n, d_n)\}_{n=1}^N` を最もよく整合するようにパラメータ :math:`\mathbf{w}` を定めるには，最尤推定を用いればよい．すなわち，訓練データに対する :math:`\mathbf{w}` の尤度
+
+.. math::
+
+    \mathcal{L}(\mathbf{w}) = \prod_{n=1}^N p(d_n|\mathbf{x}_n; \mathbf{w}) = \prod_{n=1}^N y(\mathbf{x}_n; \mathbf{w})^{d_n} (1 - y(\mathbf{x}_n; \mathbf{w}))^{1-d_n}
+
+を最大化すればよい．この尤度の対数をとり，符号を反転させると，損失関数
+
+.. math::
+
+    \mathcal{E}(\mathbf{w}) = -\sum_{n=1}^N \{d_n \log y(\mathbf{x}_n; \mathbf{w}) + (1-d_n) \log (1 - y(\mathbf{x}_n; \mathbf{w}))\}
+
+となる．これは，対数関数が単調増加であるため，尤度を最大化することと対数尤度を最大化することが同値であり，損失関数としてはその負値を最小化すればよいからである．
+
