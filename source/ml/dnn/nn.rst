@@ -70,7 +70,7 @@
 
     \mathbf{y} \equiv \mathbf{z}^{(L)}
 
-と表記する．重みやバイアスはネットワークのパラメータであり，明示的に :math:`\mathbf{y}(\mathbf{x}; \mathbf{\theta})` のように書くこともある．このパラメータを学習し，適切な出力を得ることがニューラルネットワークの目的である．教師あり学習では，下記のような入力 :math:`\mathbf{x}` に対する望ましい出力 :math:`\mathbf{d}` のペアが複数与えられる．
+と表記する．重みやバイアスはネットワークのパラメータであり，明示的に :math:`\mathbf{y}(\mathbf{x}; \mathbf{w})` のように書くこともある．このパラメータを学習し，適切な出力を得ることがニューラルネットワークの目的である．教師あり学習では，下記のような入力 :math:`\mathbf{x}` に対する望ましい出力 :math:`\mathbf{d}` のペアが複数与えられる．
 
 .. math::
 
@@ -82,13 +82,13 @@
 
 .. math::
 
-    \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{\theta})\|^2
+    \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{w})\|^2
 
 が用いられる．これを訓練データの :math:`N` 個のサンプルについて加算した
 
 .. math::
 
-    \mathcal{L}(\theta) = \sum_{n=1}^N \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{\theta})\|^2
+    \mathcal{E}(\mathbf{w}) = \sum_{n=1}^N \|\mathbf{d}_n - \mathbf{y}(\mathbf{x}_n; \mathbf{w})\|^2
 
 が損失関数となる．なお，目的とする関数の値域により適切な活性化関数を選定する必要がある．例えば，目的とする関数の値域が :math:`[-1,1]` であればtanh関数，任意の実数 :math:`(-\infty, \infty)` であれば恒等関数が適切である．
 
