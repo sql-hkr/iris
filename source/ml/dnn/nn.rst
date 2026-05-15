@@ -102,7 +102,7 @@
 
 .. math::
 
-    \mathcal{L}(\mathbf{w}) = \prod_{n=1}^N p(d_n|\mathbf{x}_n; \mathbf{w}) = \prod_{n=1}^N y(\mathbf{x}_n; \mathbf{w})^{d_n} (1 - y(\mathbf{x}_n; \mathbf{w}))^{1-d_n}
+    \mathcal{L}(\mathbf{w}) \equiv \prod_{n=1}^N p(d_n|\mathbf{x}_n; \mathbf{w}) = \prod_{n=1}^N y(\mathbf{x}_n; \mathbf{w})^{d_n} (1 - y(\mathbf{x}_n; \mathbf{w}))^{1-d_n}
 
 を最大化すればよい．この尤度の対数をとり，符号を反転させると，損失関数
 
@@ -111,4 +111,42 @@
     \mathcal{E}(\mathbf{w}) = -\sum_{n=1}^N \{d_n \log y(\mathbf{x}_n; \mathbf{w}) + (1-d_n) \log (1 - y(\mathbf{x}_n; \mathbf{w}))\}
 
 となる．これは，対数関数が単調増加であるため，尤度を最大化することと対数尤度を最大化することが同値であり，損失関数としてはその負値を最小化すればよいからである．
+
+多クラス分類は，入力 :math:`\mathbf{x}` を :math:`K` 個のクラスのいずれかに割り当てる問題である．2値分類と同様に，クラスラベルを :math:`k\in \{1, 2, \ldots, K\}` とすると，入力 :math:`\mathbf{x}` がクラス :math:`k` に属する事後確率 :math:`p(\mathcal{C}_k|\mathbf{x})` をネットワークの出力として表すことができる．
+
+.. math::
+
+    p(\mathcal{C}_k|\mathbf{x}) = y_k=z_k^{(L)}
+
+正解ラベル :math:`\mathbf{d}` をone-hotベクトルで表すと，条件付き確率は2値分類と同様に
+
+.. math::
+
+    p(\mathbf{d}|\mathbf{x})=\prod_{k=1}^K p(\mathcal{C}_k|\mathbf{x})^{d_k}
+
+と表せる．したがって，訓練データ :math:`\{(\mathbf{x}_n, \mathbf{d}_n)\}_{n=1}^N` に対する :math:`\mathbf{w}` の尤度は
+
+.. math::
+
+    \mathcal{L}(\mathbf{w}) = \prod_{n=1}^N p(\mathbf{d}_n|\mathbf{x}_n; \mathbf{w}) = \prod_{n=1}^N \prod_{k=1}^K p(\mathcal{C}_k|\mathbf{x}_n)^{d_{nk}} = \prod_{n=1}^N \prod_{k=1}^K y_k(\mathbf{x}_n; \mathbf{w})^{d_{nk}}
+
+となる．この尤度の対数をとり，符号を反転させると，損失関数
+
+.. math::
+
+    \mathcal{E}(\mathbf{w}) = -\sum_{n=1}^N \sum_{k=1}^K d_{nk} \log y_k(\mathbf{x}_n; \mathbf{w})
+
+となる．この関数は交差エントロピーと呼ばれる．なお， :math:`\mathbf{x}_n` の正解クラスを :math:`k_n` と書くとき， :math:`d_{nk_n}=1` であり， :math:`k\neq k_n` ならば :math:`d_{nk}=0` であるから，クラス :math:`k` に関する和は消えて
+
+.. math::
+
+    \mathcal{E}(\mathbf{w}) = -\sum_{n=1}^N \log y_{k_n}(\mathbf{x}_n; \mathbf{w})
+
+と単純になる．また，出力 :math:`y_k` は， :math:`u_k \equiv \log p(\mathcal{C}_k|\mathbf{x})` として，ソフトマックス関数
+
+.. math::
+
+    y_k = \frac{e^{u_k}}{\sum_{j=1}^K e^{u_j}}
+
+を用いて表すこともできる． :math:`u_k` はロジット（logit）と呼ばれる．
 
