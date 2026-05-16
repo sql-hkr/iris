@@ -68,9 +68,7 @@
 
     \mathbf{w}_{t+1} = \mathbf{w}_t - \epsilon \nabla \mathcal{E}_t + \mu \mathbf{v}_t
 
-となる．
-
-確率的勾配降下法による学習性能は，学習率の設定に敏感である．この依存を緩和するため，成分ごとの実効学習率を適応的に調整する手法が提案されている．代表例はAdaGrad，RMSProp，Adamである．表記を簡略化するために，更新量 :math:`\Delta \mathbf{w}_t \equiv \mathbf{w}_{t+1} - \mathbf{w}_t`，損失関数の勾配 :math:`\mathbf{g}_t \equiv \nabla \mathcal{E}_t`，その :math:`i` 成分を :math:`g_{t,i}` と定義する．AdaGradでは，重みを
+となる．確率的勾配降下法による学習性能は，学習率の設定に敏感である．この依存を緩和するため，成分ごとの実効学習率を適応的に調整する手法が提案されている．代表例はAdaGrad，RMSProp，Adamである．表記を簡略化するために，更新量 :math:`\Delta \mathbf{w}_t \equiv \mathbf{w}_{t+1} - \mathbf{w}_t`，損失関数の勾配 :math:`\mathbf{g}_t \equiv \nabla \mathcal{E}_t`，その :math:`i` 成分を :math:`g_{t,i}` と定義する．AdaGradでは，重みを
 
 .. math::
 
@@ -82,9 +80,7 @@
 
     \Delta w_{t,i} = -\frac{\epsilon}{\sqrt{\Braket{g_i^2}_t + \varepsilon}} g_{t,i}
 
-である．
-
-Adadeltaは，更にパラメータ更新量 :math:`\Delta w_{t,i}` の二乗についても同様に移動平均 :math:`\Braket{\Delta w_i^2}_t = \gamma \Braket{\Delta w_i^2}_{t-1} + (1-\gamma) \Delta w_{t,i}^2` をとり，分子の :math:`\epsilon` を :math:`\Braket{\Delta w_i}_{t-1}` で置き換える．この操作は，パラメータと更新量の物理的次元を整合させるという考えに基づく．これにより， :math:`\epsilon` を明示的に指定する必要がなくなる．なお， :math:`\Braket{\Delta w_i}_t` は得られないので， :math:`t-1` の値で代用している．Adamは，更にMomentumを導入したもので，現在最も広く用いられている手法の1つである．その名はAdaptive Momentに由来する．Adamでは，勾配の1次および2次モーメントを次の移動平均で求める．
+である．Adadeltaは，更にパラメータ更新量 :math:`\Delta w_{t,i}` の二乗についても同様に移動平均 :math:`\Braket{\Delta w_i^2}_t = \gamma \Braket{\Delta w_i^2}_{t-1} + (1-\gamma) \Delta w_{t,i}^2` をとり，分子の :math:`\epsilon` を :math:`\Braket{\Delta w_i}_{t-1}` で置き換える．この操作は，パラメータと更新量の物理的次元を整合させるという考えに基づく．これにより， :math:`\epsilon` を明示的に指定する必要がなくなる．なお， :math:`\Braket{\Delta w_i}_t` は得られないので， :math:`t-1` の値で代用している．Adamは，更にMomentumを導入したもので，現在最も広く用いられている手法の1つである．その名はAdaptive Momentに由来する．Adamでは，勾配の1次および2次モーメントを次の移動平均で求める．
 
 .. math::
 
