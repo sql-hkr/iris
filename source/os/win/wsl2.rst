@@ -1,12 +1,12 @@
 WSL2
 =====
 
-Windows Subsystem for Linux (WSL) は Windows の機能であり，別の仮想マシンやデュアル ブートを必要とせずに，Windows マシンで Linux 環境を実行することができる．ここでは，Ubuntu22.04を使用する例を示す．
+Windows Subsystem for Linux (WSL) は Windows の機能であり，別の仮想マシンやデュアル ブートを必要とせずに，Windows マシンで Linux 環境を実行することができる．ここでは，Ubuntu24.04を使用する例を示す．
 
 .. code-block:: powershell
 
    wsl --install
-   wsl --install Ubuntu-22.04
+   wsl --install Ubuntu-24.04
 
 なお，オンラインストアからダウンロードできる利用可能な Linux ディストリビューションのリストは，次のコマンドで確認できる．
 
